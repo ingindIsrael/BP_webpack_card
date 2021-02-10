@@ -29,20 +29,46 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let photo = `<img src="${variables.avatarURL}" class="photo" />`;
+  if (variables.avatarURL == false) photo = "<div class='photo'></div>";
+
+  let Unames = `<h1>${variables.name} ${variables.lastname}</h1>`;
+  if (variables.name == false && variables.lastname == false)
+    Unames = "<div class='Unames'></div>";
+
+  let role = `<h2>${variables.role}</h2>`;
+  if (variables.role == false || variables.role == null)
+    role = "<div class='role'></div>";
+
+  let location = `<h3>${variables.city}, ${variables.country}</h3>`;
+
+  if (
+    variables.city == null ||
+    variables.country == null ||
+    variables.city == false ||
+    variables.country == false
+  )
+    location = "<div class='location'></div>";
+
+  let SMposition = `<ul class="${variables.socialMediaPosition}">
+            <li><a href="https://twitter.com/starwars"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://github.com/starwars"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://linkedin.com/starwars"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="https://instagram.com/starwars"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+        </div>`;
+  if (variables.socialMediaPosition == false)
+    SMposition = "<div class='SMposition'></div>";
+
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/alesanchezr"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/alesanchezr"><i class="fa fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/alesanchezr"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/alesanchezr"><i class="fa fa-instagram"></i></a></li>
-          </ul>
-        </div>
+            ${photo}
+            ${Unames}
+            ${role}
+            ${location}
+            ${SMposition}
+          
     `;
 }
 
@@ -54,21 +80,23 @@ window.onload = function() {
     // if includeCover is true the algorithm should
     includeCover: true,
     // this is the url of the image that will used as background for the profile cover
-    background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da",
+    background:
+      "https://facts.net/wp-content/uploads/2015/01/AdobeStock_146236133-1320x880.jpeg",
     // this is the url for the profile avatar
-    avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
+    avatarURL:
+      "https://www.berlinale.de/media/filmstills/2020/forum-2020/202012175_1_ORG.jpg",
     // social media bar position (left or right)
     socialMediaPosition: "position-left",
     // social media usernames
-    twitter: null,
-    github: "alesanchezr",
-    linkedin: null,
-    instagram: null,
-    name: null,
-    lastname: null,
-    role: null,
-    country: null,
-    city: null
+    twitter: "user twitter account",
+    github: "user github account",
+    linkedin: "user linkedin account",
+    instagram: "user instagram account",
+    name: "User name",
+    lastname: "User lastname",
+    role: "User role",
+    country: "User country",
+    city: "User city"
   };
   render(window.variables); //render the card for the first time
 
